@@ -5,27 +5,33 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import web.model.Car;
+import service.CarService;
 
 @Service
-public class CarServiceImpl implements CarService{
+public class CarServiceImpl implements CarService {
 
-    @Override
-    public List<Car> getCars(int count) {
-        // Создаем список для хранения автомобилей
-        List<Car> cars = new ArrayList<>();
+    private final List<Car> cars;
 
-        // Добавляем заданное количество автомобилей в список
-        for (int i = 0; i < count; i++) {
-            // Создаем новый объект Car и добавляем его в список
-            cars.add(new Car("Toyota", "123456"));
-        }
-
-        return cars;
+    public CarServiceImpl() {
+        // Создаем список машин и добавляем в него несколько элементов
+        cars = new ArrayList<>();
+        cars.add(new Car("Toyota", "123456"));
+        cars.add(new Car("Ford", "789012"));
+        cars.add(new Car("Honda", "345678"));
+        // Добавьте еще машин, если необходимо
     }
 
     @Override
-    public List<Car> getAllCars() {
-        // Здесь должна быть логика получения всех машин из базы данных или другого источника данных
-        return new ArrayList<>();
+    public List<Car> getCars(int count) {
+        if (count >= 5) {
+            // Если запрошено больше или равно 5 машин, возвращаем весь список
+            return cars;
+        } else if (count <= 0) {
+            // Если count меньше или равно 0, возвращаем пустой список
+            return new ArrayList<>();
+        } else {
+            // Иначе возвращаем список с указанным количеством машин
+            return cars.subList(0, Math.min(count, cars.size()));
+        }
     }
 }

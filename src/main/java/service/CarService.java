@@ -8,5 +8,4 @@ import web.model.Car;
 @Service
 public interface CarService {
     List<Car> getCars(int count);
-    List<Car> getAllCars();
 }
