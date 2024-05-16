@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car List</title>
+</head>
+<body>
+<h1>Car List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Brand</th>
+        <th>Model</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Используем Thymeleaf для итерации по списку машин и вывода их данных в таблицу -->
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.model}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
